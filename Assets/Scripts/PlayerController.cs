@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float jumbSpeed;
     float playerOriginalScaleX;
     int playerFacingDirection = 1;
+    int point = 0;
 
     public LayerMask groundLayer;
 
@@ -33,19 +34,21 @@ public class PlayerController : MonoBehaviour
             playerFacingDirection = 1;
             rb.velocity = new Vector2(leftRightSpeed * playerFacingDirection, rb.velocity.y);
             gameObject.transform.localScale = new Vector3(playerOriginalScaleX, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-            playerAnimator.Play("PlayerWalking");
+
+            PlayAnimation("PlayerWalking", "NoAnimation");
         }
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             playerFacingDirection = -1;
             rb.velocity = new Vector2(leftRightSpeed * playerFacingDirection, rb.velocity.y);
             gameObject.transform.localScale = new Vector3(-playerOriginalScaleX, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-            playerAnimator.Play("PlayerWalking");
+            
+            PlayAnimation("PlayerWalking", "NoAnimation");
         }
         else
         {
             rb.velocity = new Vector2(0,rb.velocity.y);
-            playerAnimator.Play("PlayerIdle");
+            PlayAnimation("PlayerIdle","NoAnimation");
         }
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -54,6 +57,33 @@ public class PlayerController : MonoBehaviour
 
             rb.velocity = new Vector2(rb.velocity.x, jumbSpeed);
             }
+        }
+    }
+
+    void PlayAnimation(string animationName1 , string animationName2)
+    {
+        if (playerCollider.IsTouchingLayers(groundLayer))
+        {
+
+            playerAnimator.Play(animationName1);
+        }
+        else
+        {
+            playerAnimator.Play(animationName2);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Collectable")
+        {
+            point++;
+            Debug.LogError(point);
+            Destroy(collision.gameObject);
+        }
+        if(collision.tag == "Enemy")
+        {
+            Debug.LogError("Game Over !!");
         }
     }
 }
