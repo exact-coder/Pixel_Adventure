@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    [SerializeField] GameObject bulletPrefab;
+
+    private AudioSource playerAudioSource;
     private Rigidbody2D rb;
     private Animator playerAnimator;
     private BoxCollider2D playerCollider;
 
     public float leftRightSpeed;
     public float jumbSpeed;
+    public float bulletSpeed;
     float playerOriginalScaleX;
     int playerFacingDirection = 1;
     int point = 0;
@@ -58,6 +63,13 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumbSpeed);
             }
         }
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            //Generate Bullet
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(playerFacingDirection * bulletSpeed,0f);
+            //Add velocity to player facing directions...
+        } 
     }
 
     void PlayAnimation(string animationName1 , string animationName2)
@@ -88,3 +100,4 @@ public class PlayerController : MonoBehaviour
     }
 }
 
+//25min
