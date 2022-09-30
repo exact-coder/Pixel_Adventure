@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask groundLayer;
 
+    //Audio Clip
+    public AudioClip gameBackgroundMusic;
+    public AudioClip jumpSFX;
+    public AudioClip bulletSFX;
+    public AudioClip gameOverSFX;
+    public AudioClip collectablesSFX;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,7 +35,12 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<BoxCollider2D>();
 
+        playerAudioSource = GetComponent<AudioSource>();
+
         playerOriginalScaleX = gameObject.transform.localScale.x;
+
+        playerAudioSource.clip = gameBackgroundMusic;
+        playerAudioSource.Play();
     }
 
 
@@ -55,20 +67,25 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0,rb.velocity.y);
             PlayAnimation("PlayerIdle","NoAnimation");
         }
+        //Jump
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             if(playerCollider.IsTouchingLayers(groundLayer))
             {
 
             rb.velocity = new Vector2(rb.velocity.x, jumbSpeed);
+                // add sfx
+                playerAudioSource.PlayOneShot(jumpSFX,1f);
             }
         }
         if(Input.GetKeyDown(KeyCode.Return))
         {
             //Generate Bullet
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(playerFacingDirection * bulletSpeed,0f);
             //Add velocity to player facing directions...
+            bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(playerFacingDirection * bulletSpeed, 0f);
+            //add sfx
+            playerAudioSource.PlayOneShot(bulletSFX,1f);
         } 
     }
 
@@ -92,12 +109,14 @@ public class PlayerController : MonoBehaviour
             point++;
             Debug.LogError(point);
             Destroy(collision.gameObject);
+            playerAudioSource.PlayOneShot(collectablesSFX,1f);
         }
         if(collision.tag == "Enemy")
         {
             Debug.LogError("Game Over !!");
+            //add sfx
+            playerAudioSource.PlayOneShot(gameOverSFX,1f);
         }
     }
 }
 
-//25min
