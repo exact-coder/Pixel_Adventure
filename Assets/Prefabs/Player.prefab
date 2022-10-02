@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a32bcb5bbc340c4ca96252969eb9fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointText: {fileID: 0}
+  lifeText: {fileID: 0}
   bulletPrefab: {fileID: 6823643630356305435, guid: 33fc61365d50ff843b166a4137f840d2,
     type: 3}
   leftRightSpeed: 5

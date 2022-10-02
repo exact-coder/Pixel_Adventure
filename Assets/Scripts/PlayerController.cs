@@ -1,9 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerController : MonoBehaviour
 {
+
+    public Text pointText;
+    public Text lifeText;
+    public GameObject gameOverPanel;
 
     [SerializeField] GameObject bulletPrefab;
 
@@ -18,6 +25,7 @@ public class PlayerController : MonoBehaviour
     float playerOriginalScaleX;
     int playerFacingDirection = 1;
     int point = 0;
+    int life = 3;
 
     public LayerMask groundLayer;
 
@@ -107,16 +115,27 @@ public class PlayerController : MonoBehaviour
         if(collision.tag == "Collectable")
         {
             point++;
-            Debug.LogError(point);
+            pointText.text = "Point : " + point;
             Destroy(collision.gameObject);
             playerAudioSource.PlayOneShot(collectablesSFX,1f);
         }
         if(collision.tag == "Enemy")
         {
-            Debug.LogError("Game Over !!");
+            if (life == 0)
+            {
+                gameOverPanel.SetActive(true);
+            }
+            else
+            {
+                life--;
+                lifeText.text = "Life : " + life;
+            }
+            
+            
+
             //add sfx
             playerAudioSource.PlayOneShot(gameOverSFX,1f);
         }
     }
 }
-
+//vedio number10--1.5min
