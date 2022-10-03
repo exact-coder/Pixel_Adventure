@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -136,6 +137,16 @@ public class PlayerController : MonoBehaviour
             //add sfx
             playerAudioSource.PlayOneShot(gameOverSFX,1f);
         }
+        if(collision.tag == "LebelOneComplete")
+        {
+            //SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
+    public void RetryButtonPressed()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
-//vedio number10--1.5min
+//vedio number10--1.15min

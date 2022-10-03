@@ -190,6 +190,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43e6fd208ad58324eb0ed639bca95469, type: 3}
+--- !u!114 &17633057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3223618668325413574, guid: 1a5a65a86239abe4aaf513aa116edc1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3776137995997863992}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a32bcb5bbc340c4ca96252969eb9fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &28248621
 GameObject:
   m_ObjectHideFlags: 0
@@ -20489,7 +20501,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 719294934}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 17633057}
+        m_MethodName: RetryButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &719294934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21084,7 +21107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 4668f08864533f24b9b5980d5cc57089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
