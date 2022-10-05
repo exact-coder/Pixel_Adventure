@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Collectable
   - Enemy
-  - LebelOneComplete
+  - LebelComplete
   layers:
   - Default
   - TransparentFX
